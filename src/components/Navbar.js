@@ -1,13 +1,13 @@
 import React, { Component } from "react";
 
-export class login extends Component {
+export class Navbar extends Component {
   render() {
     return (
       <div>
-        <h1>Login Page</h1>
+        <h1>Navbar</h1>
       </div>
     );
   }
 }
 
-export default login;
+export default Navbar;
