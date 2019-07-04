@@ -14,6 +14,7 @@ import signup from "./pages/signup";
 
 //import from components
 import Navbar from "./components/Navbar";
+import AuthRoute from "./util/AuthRoute";
 
 const theme = createMuiTheme(customMUIParameters);
 let authenticated;
@@ -38,8 +39,8 @@ class App extends React.Component {
           <div className="container">
             <Switch>
               <Route exact path="/" component={home} />
-              <Route exact path="/login" component={login} />
-              <Route exact path="/signup" component={signup} />
+              <AuthRoute exact path="/login" component={login} />
+              <AuthRoute exact path="/signup" component={signup} />
             </Switch>
           </div>
         </Router>
