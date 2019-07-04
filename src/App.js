@@ -4,7 +4,7 @@ import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import "./App.css";
 import MuiThemeProvider from "@material-ui/core/styles/MuiThemeProvider";
 import createMuiTheme from "@material-ui/core/styles/createMuiTheme";
-import customTheme from "./util/customTheme";
+import customMUIParameters from "./util/theme";
 
 //import from pages
 import home from "./pages/home";
@@ -14,7 +14,7 @@ import signup from "./pages/signup";
 //import from components
 import Navbar from "./components/Navbar";
 
-const theme = createMuiTheme(customTheme);
+const theme = createMuiTheme(customMUIParameters);
 
 class App extends React.Component {
   render() {
