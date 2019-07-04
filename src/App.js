@@ -6,10 +6,13 @@ import MuiThemeProvider from "@material-ui/core/styles/MuiThemeProvider";
 import createMuiTheme from "@material-ui/core/styles/createMuiTheme";
 import customMUIParameters from "./util/theme";
 import jwtDecode from "jwt-decode";
+import axios from "axios";
 
 //import from redux
 import { Provider } from "react-redux";
 import store from "./redux/store";
+import { SET_AUTHENTICATED } from "./redux/types";
+import { logoutUser, getUserData } from "./redux/actions/userActions";
 
 //import from pages
 import home from "./pages/home";
@@ -20,17 +23,21 @@ import signup from "./pages/signup";
 import Navbar from "./components/Navbar";
 import AuthRoute from "./util/AuthRoute";
 
+axios.defaults.baseURL =
+  "https://us-central1-paper-579a4.cloudfunctions.net/api";
+
 const theme = createMuiTheme(customMUIParameters);
 let authenticated;
-const token = localStorage.PaperApiToken;
+const token = localStorage.FBIdToken;
 if (token) {
   const decodedToken = jwtDecode(token);
   if (decodedToken.exp * 1000 < Date.now()) {
-    //if token expired ? then process the following code
+    store.dispatch(logoutUser());
     window.location.href = "/login";
-    authenticated = false;
   } else {
-    authenticated = true;
+    store.dispatch({ type: SET_AUTHENTICATED });
+    axios.defaults.headers.common["Authorization"] = token;
+    store.dispatch(getUserData());
   }
 }
 
