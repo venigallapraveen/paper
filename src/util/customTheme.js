@@ -12,5 +12,8 @@ export default {
       dark: "#ff5f7f",
       contrastText: "#fff"
     }
+  },
+  typography: {
+    useNextVariants: true
   }
 };

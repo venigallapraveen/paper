@@ -1,6 +1,6 @@
 /* eslint-disable no-unused-vars */
 import React, { Component } from "react";
-import Link from "react-router-dom/Link";
+import { Link } from "react-router-dom";
 
 //material imports
 import AppBar from "@material-ui/core/AppBar";
