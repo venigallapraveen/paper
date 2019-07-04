@@ -7,6 +7,10 @@ import createMuiTheme from "@material-ui/core/styles/createMuiTheme";
 import customMUIParameters from "./util/theme";
 import jwtDecode from "jwt-decode";
 
+//import from redux
+import { Provider } from "react-redux";
+import store from "./redux/store";
+
 //import from pages
 import home from "./pages/home";
 import login from "./pages/login";
@@ -34,16 +38,18 @@ class App extends React.Component {
   render() {
     return (
       <MuiThemeProvider theme={theme}>
-        <Router>
-          <Navbar />
-          <div className="container">
-            <Switch>
-              <Route exact path="/" component={home} />
-              <AuthRoute exact path="/login" component={login} />
-              <AuthRoute exact path="/signup" component={signup} />
-            </Switch>
-          </div>
-        </Router>
+        <Provider store={store}>
+          <Router>
+            <Navbar />
+            <div className="container">
+              <Switch>
+                <Route exact path="/" component={home} />
+                <AuthRoute exact path="/login" component={login} />
+                <AuthRoute exact path="/signup" component={signup} />
+              </Switch>
+            </div>
+          </Router>
+        </Provider>
       </MuiThemeProvider>
     );
   }
