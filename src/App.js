@@ -28,7 +28,7 @@ axios.defaults.baseURL =
 
 const theme = createMuiTheme(customMUIParameters);
 let authenticated;
-const token = localStorage.FBIdToken;
+const token = localStorage.PaperApiToken;
 if (token) {
   const decodedToken = jwtDecode(token);
   if (decodedToken.exp * 1000 < Date.now()) {
