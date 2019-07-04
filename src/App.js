@@ -5,6 +5,7 @@ import "./App.css";
 import MuiThemeProvider from "@material-ui/core/styles/MuiThemeProvider";
 import createMuiTheme from "@material-ui/core/styles/createMuiTheme";
 import customMUIParameters from "./util/theme";
+import jwtDecode from "jwt-decode";
 
 //import from pages
 import home from "./pages/home";
@@ -15,6 +16,18 @@ import signup from "./pages/signup";
 import Navbar from "./components/Navbar";
 
 const theme = createMuiTheme(customMUIParameters);
+let authenticated;
+const token = localStorage.PaperApiToken;
+if (token) {
+  const decodedToken = jwtDecode(token);
+  if (decodedToken.exp * 1000 < Date.now()) {
+    //if token expired ? then process the following code
+    window.location.href = "/login";
+    authenticated = false;
+  } else {
+    authenticated = true;
+  }
+}
 
 class App extends React.Component {
   render() {
