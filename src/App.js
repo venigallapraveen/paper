@@ -22,9 +22,6 @@ import axios from "axios";
 
 const theme = createMuiTheme(customMUIParameter);
 
-// axios.defaults.baseURL =
-//   "https://us-central1-paper-579a4.cloudfunctions.net/api";
-
 const token = localStorage.AppToken;
 if (token) {
   const decodedToken = jwtDecode(token);
