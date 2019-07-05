@@ -32,6 +32,11 @@ export default function(state = initialState, action) {
         loading: false,
         ...action.payload
       };
+    case LOADING_USER:
+      return {
+        ...state,
+        loading: true
+      };
 
     default:
       return state;
