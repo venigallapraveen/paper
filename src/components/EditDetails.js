@@ -15,7 +15,12 @@ import DialogContent from "@material-ui/core/DialogContent";
 import DialogTitle from "@material-ui/core/DialogTitle";
 import EditIcon from "@material-ui/icons/Edit";
 
-const styles = { ...CustomCss };
+const styles = {
+  ...CustomCss,
+  button: {
+    float: "right"
+  }
+};
 
 class EditDetails extends Component {
   state = {
