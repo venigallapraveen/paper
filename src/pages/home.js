@@ -31,7 +31,7 @@ export class home extends Component {
           {screamsFromApi}
         </Grid>
         <Grid item sm={4} xs={12}>
-          Profile
+          <Profile />
         </Grid>
       </Grid>
     );
