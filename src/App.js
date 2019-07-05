@@ -1,34 +1,31 @@
-/* eslint-disable no-unused-vars */
-import React from "react";
+import React, { Component } from "react";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import "./App.css";
 import MuiThemeProvider from "@material-ui/core/styles/MuiThemeProvider";
 import createMuiTheme from "@material-ui/core/styles/createMuiTheme";
-import customMUIParameters from "./util/theme";
 import jwtDecode from "jwt-decode";
-import axios from "axios";
-
-//import from redux
+// Redux
 import { Provider } from "react-redux";
 import store from "./redux/store";
 import { SET_AUTHENTICATED } from "./redux/types";
 import { logoutUser, getUserData } from "./redux/actions/userActions";
-
-//import from pages
+// Components
+import Navbar from "./components/Navbar";
+import customMUIParameter from "./util/theme";
+import AuthRoute from "./util/AuthRoute";
+// Pages
 import home from "./pages/home";
 import login from "./pages/login";
 import signup from "./pages/signup";
 
-//import from components
-import Navbar from "./components/Navbar";
-import AuthRoute from "./util/AuthRoute";
+import axios from "axios";
 
-axios.defaults.baseURL =
-  "https://us-central1-paper-579a4.cloudfunctions.net/api";
+const theme = createMuiTheme(customMUIParameter);
 
-const theme = createMuiTheme(customMUIParameters);
-let authenticated;
-const token = localStorage.PaperApiToken;
+// axios.defaults.baseURL =
+//   "https://us-central1-paper-579a4.cloudfunctions.net/api";
+
+const token = localStorage.AppToken;
 if (token) {
   const decodedToken = jwtDecode(token);
   if (decodedToken.exp * 1000 < Date.now()) {
@@ -41,7 +38,7 @@ if (token) {
   }
 }
 
-class App extends React.Component {
+class App extends Component {
   render() {
     return (
       <MuiThemeProvider theme={theme}>

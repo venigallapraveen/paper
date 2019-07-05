@@ -10,12 +10,6 @@ import {
 } from "../types";
 import axios from "axios";
 
-const setAuthorizationHeader = token => {
-  const PaperApiToken = `Bearer ${token}`;
-  localStorage.setItem("PaperApiToken", PaperApiToken);
-  axios.defaults.headers.common["Authorization"] = PaperApiToken;
-};
-
 export const loginUser = (userData, history) => dispatch => {
   dispatch({ type: LOADING_UI });
   axios
@@ -69,4 +63,10 @@ export const logoutUser = () => dispatch => {
   localStorage.removeItem("PaperApiToken");
   delete axios.defaults.headers.common["Authorization"];
   dispatch({ type: SET_UNAUTHENTICATED });
+};
+
+const setAuthorizationHeader = token => {
+  const AppToken = `Bearer ${token}`;
+  localStorage.setItem("AppToken", AppToken);
+  axios.defaults.headers.common["Authorization"] = AppToken;
 };
