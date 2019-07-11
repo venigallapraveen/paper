@@ -5,6 +5,7 @@ import { connect } from "react-redux";
 import PropTypes from "prop-types";
 import MyButton from "../../util/MyButton";
 import PostScream from "../scream/PostScream";
+import Notifications from "./Notifications";
 
 //material imports
 import AppBar from "@material-ui/core/AppBar";
@@ -26,6 +27,7 @@ class Navbar extends Component {
                   <HomeIcon />
                 </MyButton>
               </Link>
+              <Notifications />
             </Fragment>
           ) : (
             <Fragment>
