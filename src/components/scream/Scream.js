@@ -1,5 +1,5 @@
-/* eslint-disable no-unused-vars */
 import React, { Component } from "react";
+import withStyles from "@material-ui/core/styles/withStyles";
 import { Link } from "react-router-dom";
 import dayjs from "dayjs";
 import relativeTime from "dayjs/plugin/relativeTime";
@@ -8,23 +8,23 @@ import MyButton from "../../util/MyButton";
 import DeleteScream from "./DeleteScream";
 import ScreamDialog from "./ScreamDialog";
 import LikeButton from "./LikeButton";
-
-//material ui imports
+import CustomCSS from "../../util/theme";
+// MUI Stuff
 import Card from "@material-ui/core/Card";
-import withStyles from "@material-ui/core/styles/withStyles";
 import CardContent from "@material-ui/core/CardContent";
 import CardMedia from "@material-ui/core/CardMedia";
 import Typography from "@material-ui/core/Typography";
+// Icons
 import ChatIcon from "@material-ui/icons/Chat";
-
 // Redux
 import { connect } from "react-redux";
 
 const styles = {
+  ...CustomCSS,
   card: {
     position: "relative",
     display: "flex",
-    marginBottom: 10
+    marginBottom: 20
   },
   image: {
     minWidth: 200

@@ -80,9 +80,20 @@ export const editUserDetails = userDetails => dispatch => {
 };
 
 export const logoutUser = () => dispatch => {
-  localStorage.removeItem("PaperApiToken");
+  localStorage.removeItem("AppToken");
   delete axios.defaults.headers.common["Authorization"];
   dispatch({ type: SET_UNAUTHENTICATED });
+};
+
+export const markNotificationsRead = notificationIds => dispatch => {
+  axios
+    .post("/notifications", notificationIds)
+    .then(res => {
+      dispatch({
+        type: MARK_NOTIFICATIONS_READ
+      });
+    })
+    .catch(err => console.log(err));
 };
 
 const setAuthorizationHeader = token => {

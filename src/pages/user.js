@@ -1,15 +1,15 @@
-import React, { Component } from 'react';
-import PropTypes from 'prop-types';
-import axios from 'axios';
-import Scream from '../components/scream/Scream';
-import StaticProfile from '../components/profile/StaticProfile';
-import Grid from '@material-ui/core/Grid';
+import React, { Component } from "react";
+import PropTypes from "prop-types";
+import axios from "axios";
+import Scream from "../components/scream/Scream";
+import StaticProfile from "../components/profile/StaticProfile";
+import Grid from "@material-ui/core/Grid";
 
-import ScreamSkeleton from '../util/ScreamSkeleton';
-import ProfileSkeleton from '../util/ProfileSkeleton';
+import ScreamSkeleton from "../util/ScreamSkeleton";
+import ProfileSkeleton from "../util/ProfileSkeleton";
 
-import { connect } from 'react-redux';
-import { getUserData } from '../redux/actions/dataActions';
+import { connect } from "react-redux";
+import { getUserData } from "../redux/actions/dataActions";
 
 class user extends Component {
   state = {
@@ -25,12 +25,12 @@ class user extends Component {
     this.props.getUserData(handle);
     axios
       .get(`/user/${handle}`)
-      .then((res) => {
+      .then(res => {
         this.setState({
           profile: res.data.user
         });
       })
-      .catch((err) => console.log(err));
+      .catch(err => console.log(err));
   }
   render() {
     const { screams, loading } = this.props.data;
@@ -41,9 +41,9 @@ class user extends Component {
     ) : screams === null ? (
       <p>No screams from this user</p>
     ) : !screamIdParam ? (
-      screams.map((scream) => <Scream key={scream.screamId} scream={scream} />)
+      screams.map(scream => <Scream key={scream.screamId} scream={scream} />)
     ) : (
-      screams.map((scream) => {
+      screams.map(scream => {
         if (scream.screamId !== screamIdParam)
           return <Scream key={scream.screamId} scream={scream} />;
         else return <Scream key={scream.screamId} scream={scream} openDialog />;
@@ -51,7 +51,7 @@ class user extends Component {
     );
 
     return (
-      <Grid container spacing={16}>
+      <Grid container spacing={3}>
         <Grid item sm={8} xs={12}>
           {screamsMarkup}
         </Grid>
@@ -72,7 +72,7 @@ user.propTypes = {
   data: PropTypes.object.isRequired
 };
 
-const mapStateToProps = (state) => ({
+const mapStateToProps = state => ({
   data: state.data
 });
 

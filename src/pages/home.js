@@ -1,34 +1,29 @@
-/* eslint-disable no-unused-vars */
 import React, { Component } from "react";
 import Grid from "@material-ui/core/Grid";
-import axios from "axios";
-import Scream from "../components/Scream";
-import Profile from "../components/Profile";
+import PropTypes from "prop-types";
 
-export class home extends Component {
-  state = {
-    screams: null
-  };
+import Scream from "../components/scream/Scream";
+import Profile from "../components/profile/Profile";
+import ScreamSkeleton from "../util/ScreamSkeleton";
 
+import { connect } from "react-redux";
+import { getScreams } from "../redux/actions/dataActions";
+
+class home extends Component {
   componentDidMount() {
-    axios
-      .get("/screams")
-      .then(res => {
-        this.setState({ screams: res.data });
-      })
-      .catch(err => console.log);
+    this.props.getScreams();
   }
   render() {
-    let screamsFromApi = this.state.screams
-      ? this.state.screams.map(scream => (
-          <Scream key={scream.screamId} scream={scream} />
-        ))
-      : "";
-
+    const { screams, loading } = this.props.data;
+    let recentScreamsMarkup = !loading ? (
+      screams.map(scream => <Scream key={scream.screamId} scream={scream} />)
+    ) : (
+      <ScreamSkeleton />
+    );
     return (
       <Grid container spacing={3}>
         <Grid item sm={8} xs={12}>
-          {screamsFromApi}
+          {recentScreamsMarkup}
         </Grid>
         <Grid item sm={4} xs={12}>
           <Profile />
@@ -38,4 +33,16 @@ export class home extends Component {
   }
 }
 
-export default home;
+home.propTypes = {
+  getScreams: PropTypes.func.isRequired,
+  data: PropTypes.object.isRequired
+};
+
+const mapStateToProps = state => ({
+  data: state.data
+});
+
+export default connect(
+  mapStateToProps,
+  { getScreams }
+)(home);
